@@ -1,0 +1,11 @@
+---
+- hosts : all 
+  vars : 
+    newrelic_license_key: "ded42511bb8c08f9c74e5680958de43562f87eda"
+    newrelic_dir: "/home/vagrant/www/"
+    download_dir: "/home/jeysonmaia/Downloads"
+    newrelic_version: "3.7.0"
+    newrelic_container: ""
+    newrelic_download_url: "https://oss.sonatype.org/content/repositories/releases/com/newrelic/agent/java/newrelic-java/{{newrelic_version}}/newrelic-java-{{newrelic_version}}.zip"
+  roles : 
+  - {role : newrelic}
