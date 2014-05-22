@@ -1,0 +1,7 @@
+---
+#newrelic_license_key: 
+newrelic_dir: "/home/vagrant/newrelic"
+newrelic_download_dir: "~/Downloads"
+newrelic_version: "3.7.0"
+newrelic_container: "tomcat"
+newrelic_download_url: "https://oss.sonatype.org/content/repositories/releases/com/newrelic/agent/java/newrelic-java/{{newrelic_version}}/newrelic-java-{{newrelic_version}}.zip"
