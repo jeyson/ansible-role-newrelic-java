@@ -1,2 +1,33 @@
 ---
-# tasks file for ansible-role-newrelic-java
+- name: 
+  local_action: >
+    get_url 
+      url="{{newrelic_download_url}}"
+      dest="{{download_dir}}/newrelic-java-{{newrelic_version}}.zip"
+
+- name: ensures New Relic folder exists
+  file:
+    path="{{newrelic_dir}}/{{newrelic_version}}"
+    state=directory
+    mode=0755
+
+- name: unpack New Relic
+  unarchive:
+    src="{{ download_dir}}/newrelic-java-{{newrelic_version}}.zip"
+    dest="{{newrelic_dir}}/{{newrelic_version}}"
+    creates="{{newrelic_dir}}/{{newrelic_version}}/newrelic.jar"
+  tags: unpack
+
+- name: moves New Relic content to its rightfull place
+  shell:
+    mv newrelic/* ./; rm -rf newrelic
+    chdir="{{newrelic_dir}}/{{newrelic_version}}"
+    creates="{{newrelic_dir}}/{{newrelic_version}}/newrelic.jar"
+
+- name: configures newrelic.yml
+  template:
+    src="newrelic.yml.j2"
+    dest="{{newrelic_dir}}/{{newrelic_version}}/newrelic.yml"
+
+- include: tomcat.yml
+  when: newrelic_container == 'tomcat'
