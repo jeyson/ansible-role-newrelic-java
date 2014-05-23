@@ -1,5 +1,5 @@
 ---
-- name: 
+- name: ensures New Relic package is present at control machine
   local_action: >
     get_url 
       url="{{newrelic_download_url}}"
